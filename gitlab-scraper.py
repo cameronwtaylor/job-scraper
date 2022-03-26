@@ -1,5 +1,6 @@
 import pandas as pd
 import requests
+import json
 from bs4 import BeautifulSoup
 
 url = 'https://boards.greenhouse.io/gitlab'
@@ -31,7 +32,8 @@ department_level_three_list = create_list_of_departments('h5','h4','three')
 
 department_list = department_level_one_list + department_level_two_list + department_level_three_list
 
-department_df = pd.DataFrame(department_list)
+with open('gitlab_departments.json', 'w') as fp:
+   json.dump(department_list, fp, sort_keys=True, indent=4)
 
 job_list = []
 jobs = soup.find_all('div', {'class':'opening'})
@@ -48,4 +50,5 @@ for job in jobs:
                 'job_location':job_location_value}
     job_list.append(job_dict)
 
-job_df = pd.DataFrame(job_list)
+with open('gitlab_jobs.json', 'w') as fp:
+   json.dump(job_list, fp, sort_keys=True, indent=4)
