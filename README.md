@@ -68,6 +68,14 @@ Depending on what you are making, it can be a good idea to include screenshots o
 * https://docs.airbyte.com/quickstart/deploy-airbyte
 * https://airbyte.com/tutorials/orchestrate-data-ingestion-and-transformation-pipelines
 
+## Infrastructure
+* Scraping scripts (Python with `requests` and `BeautifulSoup4`)
+* Extract/Load (Airbyte)
+* Transform (dbt)
+* Orchestration (Dagster)
+* Storage (Postgres)
+* Containerization (Docker)
+
 ## Usage
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
