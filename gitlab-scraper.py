@@ -3,13 +3,6 @@ import json
 from bs4 import BeautifulSoup
 from dagster import in_process_executor, job, op, mem_io_manager
 
-@op
-def retrieve_job_board_soup():
-    url = 'https://boards.greenhouse.io/gitlab'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    return soup
-
 def create_list_of_departments(soup, tag, previous_tag, department_level):
     department_list = []
     departments = soup.find_all(tag)
@@ -26,6 +19,13 @@ def create_list_of_departments(soup, tag, previous_tag, department_level):
                            'department_parent_id':department_parent_id_value}
         department_list.append(department_dict)
     return list(filter(lambda i: i['department_id'] != 'filter-count', department_list)) 
+
+@op
+def retrieve_job_board_soup():
+    url = 'https://boards.greenhouse.io/gitlab'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    return soup
 
 @op
 def build_department_json(soup):
@@ -56,6 +56,8 @@ def build_job_json(soup):
         json.dump(job_list, fp, sort_keys=True, indent=4)
 
 @job(
+    #in memory io manager and in process executor used because bs4
+    #text output cannot be pickled with the default fs_io_manager
     resource_defs={'io_manager': mem_io_manager},
     executor_def=in_process_executor
 )
