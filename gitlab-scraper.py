@@ -33,7 +33,7 @@ def build_department_json(soup):
     department_level_two_list = create_list_of_departments(soup, 'h4', 'h3', 'two')
     department_level_three_list = create_list_of_departments(soup, 'h5', 'h4', 'three')
     department_list = department_level_one_list + department_level_two_list + department_level_three_list
-    with open('gitlab_departments.json', 'w') as fp:
+    with open('/private/tmp/airbyte_local/gitlab/gitlab_departments.json', 'w') as fp:
         json.dump(department_list, fp, sort_keys=True, indent=4)
 
 @op
@@ -52,7 +52,7 @@ def build_job_json(soup):
                     'job_office_id':job_office_id_value,
                     'job_location':job_location_value}
         job_list.append(job_dict)
-    with open('gitlab_jobs.json', 'w') as fp:
+    with open('/private/tmp/airbyte_local/gitlab/gitlab_jobs.json', 'w') as fp:
         json.dump(job_list, fp, sort_keys=True, indent=4)
 
 @job(
