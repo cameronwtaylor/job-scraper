@@ -1,6 +1,7 @@
 import requests
 import json
 from bs4 import BeautifulSoup
+from dagster import job, op
 
 url = 'https://boards.greenhouse.io/gitlab'
 response = requests.get(url)
