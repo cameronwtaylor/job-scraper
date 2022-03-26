@@ -1,13 +1,41 @@
 import requests
 import json
 from bs4 import BeautifulSoup
-from dagster import job, op
+from dagster import in_process_executor, job, op, mem_io_manager
 
-url = 'https://boards.greenhouse.io/gitlab'
-response = requests.get(url)
-soup = BeautifulSoup(response.text, 'html.parser')
+@op
+def retrieve_job_board_soup():
+    url = 'https://boards.greenhouse.io/gitlab'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    return soup
 
-def create_list_of_departments(tag, previous_tag, department_level):
+@op
+def set_tag_h3():
+    return 'h3'
+
+@op
+def set_tag_h4():
+    return 'h4'
+
+@op
+def set_tag_h5():
+    return 'h5'
+
+@op
+def set_department_level_one():
+    return 'one'
+
+@op
+def set_department_level_two():
+    return 'two'
+
+@op
+def set_department_level_three():
+    return 'three'
+
+@op
+def create_list_of_departments(soup, tag, previous_tag, department_level):
     department_list = []
     departments = soup.find_all(tag)
     for department in departments:
@@ -25,17 +53,27 @@ def create_list_of_departments(tag, previous_tag, department_level):
     return list(filter(lambda i: i['department_id'] != 'filter-count', department_list)) 
 
 @op
-def build_department_json():
-    department_level_one_list = create_list_of_departments('h3','h3','one')
-    department_level_two_list = create_list_of_departments('h4','h3','two')
-    department_level_three_list = create_list_of_departments('h5','h4','three')
+def build_department_json(department_level_one_list, department_level_two_list, department_level_three_list):
     department_list = department_level_one_list + department_level_two_list + department_level_three_list
     with open('gitlab_departments.json', 'w') as fp:
         json.dump(department_list, fp, sort_keys=True, indent=4)
 
-@job
-def serial():
-    build_department_json()
+@job(
+    resource_defs={'io_manager': mem_io_manager},
+    executor_def=in_process_executor
+)
+def gitlab_jobs_extract():
+    soup = retrieve_job_board_soup()
+    tag_h3 = set_tag_h3()
+    tag_h4 = set_tag_h4()
+    tag_h5 = set_tag_h5()
+    department_level_one = set_department_level_one()
+    department_level_two = set_department_level_two()
+    department_level_three = set_department_level_three()
+    department_level_one_list = create_list_of_departments(soup, tag_h3, tag_h3, department_level_one)
+    department_level_two_list = create_list_of_departments(soup, tag_h4, tag_h3, department_level_two)
+    department_level_three_list = create_list_of_departments(soup, tag_h5, tag_h4, department_level_three) 
+    build_department_json(department_level_one_list, department_level_two_list, department_level_three_list)
 
 """ job_list = []
 jobs = soup.find_all('div', {'class':'opening'})
