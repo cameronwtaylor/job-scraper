@@ -49,10 +49,3 @@ for job in jobs:
     job_list.append(job_dict)
 
 job_df = pd.DataFrame(job_list)
-(job_df.set_index(['job_title', 'job_href','job_location'])
-   .apply(lambda x: x.str.split(',').explode())
-   .reset_index())
-
-job_df['job_department_id'] = list(job_df['job_department_id'])
-
-job_df.explode('job_department_id')
