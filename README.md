@@ -64,6 +64,15 @@ On some READMEs, you may see small images that convey metadata, such as whether 
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
 ## Installation
+1. Install Python 3.9.10
+2. Install git
+2. Clone this repo (`git clone https://gitlab.com/cameronwtaylor/job-scraper.git`)
+3. Navigate into the folder containing the repo
+3. Create a virtual environment in the project folder (`python3 -m venv .venv`)
+4. Install required dependencies (`python3 -m pip install -r requirements.txt`)
+5. Activate the environment (`source .venv/bin/activate`)
+6. Launch the Dagster UI (`dagit -f gitlab-scraper.py`)
+
 * https://www.docker.com/products/docker-desktop/
 * https://docs.airbyte.com/quickstart/deploy-airbyte
 * https://airbyte.com/tutorials/orchestrate-data-ingestion-and-transformation-pipelines
