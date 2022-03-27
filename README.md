@@ -66,16 +66,34 @@ Depending on what you are making, it can be a good idea to include screenshots o
 ## Installation
 1. Install Python 3.9.10
 2. Install git
+3. Install Docker https://docs.docker.com/desktop/mac/install/
+https://dbeaver.io/download/
 2. Clone this repo (`git clone https://gitlab.com/cameronwtaylor/job-scraper.git`)
 3. Navigate into the folder containing the repo
 3. Create a virtual environment in the project folder (`python3 -m venv .venv`)
 4. Install required dependencies (`python3 -m pip install -r requirements.txt`)
 5. Activate the environment (`source .venv/bin/activate`)
 6. Launch the Dagster UI (`dagit -f gitlab-scraper.py`)
+7. Clone the Airbyte repo (`git clone https://github.com/airbytehq/airbyte.git`)
+8. Navigate into the local repo
+9. Open Docker Desktop
+10. Install Airbyte (`docker-compose up`)
+11. Navigate to http://localhost:8000/ to test Airbyte installation
+12. Pull a docker postgres instance (`docker pull postgres`)
+13. Run a postgres instance (`docker run --name postgres-database -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD=password -d postgres`)
+14. Create a folder called `gitlab` inside `tmp/airbyte_local`
+15. Create an Airbyte source for gitlab departments file
+16. Create an Airbyte source for gitlab jobs file
+17. Create an Airbyte destination for local postgres
+18. Create a connection between departments file source and destination
+19. Create a connection between jobs file source and destination
+20. Load the connection IDs into github-scraper.py
+
 
 * https://www.docker.com/products/docker-desktop/
 * https://docs.airbyte.com/quickstart/deploy-airbyte
 * https://airbyte.com/tutorials/orchestrate-data-ingestion-and-transformation-pipelines
+* https://airbyte.com/tutorials/data-scraping-with-airflow-and-beautiful-soup
 
 ## Infrastructure
 * Scraping scripts (Python with `requests` and `BeautifulSoup4`)
