@@ -32,7 +32,7 @@ This project scrapes data from individual company job boards.
 **Install Docker and Airbyte**
 1. Open a terminal window from the local folder you created in **Initial Setup** or `cd` into the folder
 2. Follow the official [Deploy Airbyte](https://docs.airbyte.com/quickstart/deploy-airbyte) instructions
-3. Create a folder called `gitlab` inside `tmp/airbyte_local` (this is a hidden folder in the root directory)
+3. Create a folder called `gitlab` inside `tmp/airbyte_local` (this is a hidden folder in the root directory of your machine)
 
 If this is your first time installing Docker, you may need to open Docker Desktop before running `docker-compose up` to avoid errors.
 
@@ -42,11 +42,11 @@ If this is your first time installing Docker, you may need to open Docker Deskto
 
 **Create Airbyte Components**
 1. Navigate to http://localhost:8000/
-1. Create an Airbyte source for GitLab departments file
-2. Create an Airbyte source for GitLab jobs file
-3. Create an Airbyte destination for local Postgres
-4. Create a connection between departments file source and destination
-5. Create a connection between jobs file source and destination
+1. Create an Airbyte source for the GitLab departments file
+2. Create an Airbyte source for the GitLab jobs file
+3. Create an Airbyte destination for the local Postgres instance
+4. Create a connection between the departments source and the destination
+5. Create a connection between the jobs source and the destination
 6. Load the connection IDs into github_scraper.py
 
 **Run the Scraper**
