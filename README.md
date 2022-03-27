@@ -83,10 +83,11 @@ Please submit an issue for any support.
 
 **Short Term**
 * Use dagster-dbt to add dbt transformation example to the pipeline
+* Persist dagit to preserve run history
 * Write scrapers for more job boards
 
 **Long Term**
-* Host this project on the cloud to automate pipeline
+* Host this project on the cloud to automate stack
 * Transition from Postgres to Snowflake
 * Create weekly email digest of new jobs
 
