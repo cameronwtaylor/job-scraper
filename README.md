@@ -2,8 +2,8 @@
 This project scrapes data from individual company job boards. 
 
 **Goals**
-* Learning the components of the Modern Data Stack
-* Long term: Creating a curated repository of remote jobs to overcome the challenges of traditional job aggregators including
+* Learn the components of the Modern Data Stack
+* Long term: Create a curated repository of remote jobs to overcome traditional job aggregator challenges including
     * Duplication of postings
     * Lack of postings
     * Inability to perform fine-grained searching
