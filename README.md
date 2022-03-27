@@ -86,9 +86,11 @@ Please submit an issue for any support.
 * Persist dagit to preserve run history
 * Write scrapers for more job boards
 
+**Intermediate**
+* Create a web app to display jobs
+
 **Long Term**
-* Host this project on the cloud to automate stack
-* Transition from Postgres to Snowflake
+* Host this project on the cloud to automate data management and provide a public website
 * Create weekly email digest of new jobs
 
 ## Contributing
