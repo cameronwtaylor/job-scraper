@@ -42,11 +42,16 @@ If this is your first time installing Docker, you may need to open Docker Deskto
 
 **Create Airbyte Components**
 1. Navigate to http://localhost:8000/
-1. Create an Airbyte source for the GitLab departments file
+2. Create an Airbyte source for the GitLab departments file
+![Airbyte GitLab departments file source](/images/airbyte_gitlab_departments_source.png)
 2. Create an Airbyte source for the GitLab jobs file
+![Airbyte GitLab jobs file source](/images/airbyte_gitlab_jobs_source.png)
 3. Create an Airbyte destination for the local Postgres instance
+![Airbyte local Postgres destination](/images/airbyte_postgres_destination.png)
 4. Create a connection between the departments source and the destination
+![Airbyte GitLab departments connection](/images/airbyte_gitlab_departments_connection.png)
 5. Create a connection between the jobs source and the destination
+![Airbyte GitLab jobs connection](/images/airbyte_gitlab_jobs_connection.png)
 6. Load the connection IDs into github_scraper.py
 
 **Run the Scraper**
