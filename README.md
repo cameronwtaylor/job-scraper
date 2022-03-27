@@ -52,7 +52,7 @@ If this is your first time installing Docker, you may need to open Docker Deskto
 ![Airbyte GitLab departments connection](/images/airbyte_gitlab_departments_connection.png)
 5. Create a connection between the jobs source and the destination
 ![Airbyte GitLab jobs connection](/images/airbyte_gitlab_jobs_connection.png)
-6. Retrieve the connection ID for each connection by looking at UUID in the URL of the connection
+6. Retrieve the connection ID for each connection by looking at the UUID in the URL of the connection
 `http://localhost:8000/workspaces/53dbc046-08cd-4a4a-b980-370a9c56833e/connections/b503b849-189e-47eb-b684-fdbe1221cd4c/status`
 7. Load the connection IDs into `scrapers/github_scraper.py` in the `sync_gitlab_departments` and `sync_gitlab_jobs` Dagster ops
 
@@ -88,7 +88,6 @@ Please submit an issue for any support.
 **Long Term**
 * Host this project on the cloud to automate pipeline
 * Transition from Postgres to Snowflake
-* Create 
 * Create weekly email digest of new jobs
 
 ## Contributing
