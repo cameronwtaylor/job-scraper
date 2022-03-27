@@ -2,7 +2,7 @@
 This project scrapes data from individual company job boards. 
 
 **Goals**
-* Learning the components of the Modern Data Stack including
+* Learning the components of the Modern Data Stack
 * Long term: Creating a curated repository of remote jobs to overcome the challenges of traditional job aggregators including
     * Duplication of postings
     * Lack of postings
@@ -44,12 +44,10 @@ https://dbeaver.io/download/
 * https://airbyte.com/tutorials/data-scraping-with-airflow-and-beautiful-soup
 
 ## Infrastructure
-* Scraping scripts (Python with `requests` and `BeautifulSoup4`)
-* Extract/Load (Airbyte)
-* Transform (dbt)
-* Orchestration (Dagster)
-* Storage (Postgres)
-* Containerization (Docker)
+* Scraping scripts - [Python](https://www.python.org/) with [requests](https://docs.python-requests.org/en/latest/) and [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+* Extract/Load - [Airbyte](https://airbyte.com/)
+* Orchestration - [Dagster](https://dagster.io/)
+* Storage - [Postgres](https://www.postgresql.org/)
 
 ## Usage
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
