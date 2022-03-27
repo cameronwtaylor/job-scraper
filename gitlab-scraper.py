@@ -2,6 +2,7 @@ import requests
 import json
 from bs4 import BeautifulSoup
 from dagster import in_process_executor, job, op, mem_io_manager
+from dagster_airbyte import airbyte_resource, airbyte_sync_op
 
 def create_list_of_departments(soup, tag, previous_tag, department_level):
     department_list = []
@@ -55,13 +56,24 @@ def build_job_json(soup):
     with open('/private/tmp/airbyte_local/gitlab/gitlab_jobs.json', 'w') as fp:
         json.dump(job_list, fp, sort_keys=True, indent=4)
 
+sync_gitlab_departments = airbyte_sync_op.configured(
+    {"connection_id": "b503b849-189e-47eb-b684-fdbe1221cd4c"}, name="sync_gitlab_departments"
+)
+
+sync_gitlab_jobs = airbyte_sync_op.configured(
+    {"connection_id": "411aed26-f442-4b94-ba79-3a5cae0dd3da"}, name="sync_gitlab_jobs"
+)
+
 @job(
     #in memory io manager and in process executor used because bs4
     #text output cannot be pickled with the default fs_io_manager
-    resource_defs={'io_manager': mem_io_manager},
+    resource_defs={
+        'io_manager': mem_io_manager,
+        'airbyte': airbyte_resource.configured({'host': 'localhost', 'port': '8000'}),
+    },
     executor_def=in_process_executor
 )
 def gitlab_jobs_extract():
     soup = retrieve_job_board_soup()
-    build_department_json(soup)
-    build_job_json(soup)
+    sync_gitlab_departments(start_after=build_department_json(soup))
+    sync_gitlab_jobs(start_after=build_job_json(soup))
